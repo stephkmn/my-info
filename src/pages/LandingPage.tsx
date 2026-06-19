@@ -6,6 +6,7 @@ export function LandingPage() {
             <h1>Welcome to MInfo</h1>
             <Link to="/form">Generate QR Code</Link>
             <button>Edit My Info</button>
+            <Link to="/qr">Temporary QR button</Link>
         </>
     );
 }
