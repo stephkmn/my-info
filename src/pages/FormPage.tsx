@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { InputField } from "../components/InputField";
+
 export function FormPage(){
   return (
     <PersonalSection/>
@@ -79,25 +81,4 @@ function PersonalSection() {
       </select>
     </div>
   )
-}
-
-type InputFieldProps = {
-  field: string;
-  fieldID: string;
-  fieldType: React.HTMLInputTypeAttribute;
-  placeHolder: string;
-};
-
-function InputField({
-  field,
-  fieldID,
-  fieldType,
-  placeHolder="",
-}: InputFieldProps) {
-  return (
-    <>
-      <label htmlFor={fieldID}>{field}</label>
-      <input type={fieldType} id={fieldID} name={field} placeholder={placeHolder} />
-    </>
-  );
 }
