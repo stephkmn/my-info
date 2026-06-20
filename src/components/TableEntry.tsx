@@ -57,14 +57,15 @@ export function TableEntry({
                 <label htmlFor="Additional Details">Additional Details</label>
                 <input
                     type="text"
-                    id="add-details"
-                    name="add-details"
+                    id="addDetails"
+                    name="addDetails"
                     placeholder=""
                 />
+
+                <button type="submit" className="table-entry-submit-btn">
+                    Submit
+                </button>
             </form>
-            <button type="submit" className="table-entry-submit-btn">
-                Submit
-            </button>
         </div>
     )
 }
