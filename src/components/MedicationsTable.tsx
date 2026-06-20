@@ -30,7 +30,7 @@ export function MedicationsTable({
                             <td>{row.frequency}</td>
                             <td>{row.addDetails}</td>
                             <td className="actions">
-                                <button className="edit-btn">Edit</button>
+                                <button className="edit-btn" onClick={() => editRow(idx)}>Edit</button>
                                 <button className="del-btn" onClick={() => deleteRow(idx)}>Delete</button>
                             </td>
                         </tr>
