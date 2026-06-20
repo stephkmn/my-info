@@ -1,4 +1,4 @@
-import { useState, SubmitEvent } from "react";
+import { useState, SubmitEvent, ChangeEvent } from "react";
 import { MedicationRow } from "../types/MedicationRow"
 
 export function TableEntry({
@@ -21,6 +21,13 @@ export function TableEntry({
         onSubmit(formState);
     };
 
+    const handleChange = (e:ChangeEvent<HTMLInputElement>) => {
+        setFormState({
+            ...formState,
+            [e.target.name]: e.target.value
+        });
+    }
+
     return(
         <div className="table-entry-wrapper"
             onClick={(e) => {
@@ -36,6 +43,8 @@ export function TableEntry({
                     id="medication"
                     name="medication"
                     placeholder="Medication Name"
+                    value={formState.medication}
+                    onChange={handleChange}
                 />
 
                 <label htmlFor="Dosage">Dosage</label>
@@ -44,6 +53,8 @@ export function TableEntry({
                     id="dosage"
                     name="dosage"
                     placeholder="e.g. 200 mg"
+                    value={formState.dosage}
+                    onChange={handleChange}
                 />
 
                 <label htmlFor="Frequency">Frequency</label>
@@ -52,6 +63,8 @@ export function TableEntry({
                     id="frequency"
                     name="frequency"
                     placeholder="e.g. 2 times a day"
+                    value={formState.frequency}
+                    onChange={handleChange}
                 />
                 
                 <label htmlFor="Additional Details">Additional Details</label>
@@ -60,6 +73,8 @@ export function TableEntry({
                     id="addDetails"
                     name="addDetails"
                     placeholder=""
+                    value={formState.addDetails}
+                    onChange={handleChange}
                 />
 
                 <button type="submit" className="table-entry-submit-btn">
