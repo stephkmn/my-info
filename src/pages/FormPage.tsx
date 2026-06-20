@@ -1,8 +1,9 @@
 import { useState } from "react";
 
 import { InputField } from "../components/InputField";
-import { MedicationsSection } from "../components/MedicationsSection";
-import { AllergiesSection } from "../components/AllergiesSection";
+import { MedicationsSection } from "./form-page-sections/MedicationsSection";
+import { AllergiesSection } from "./form-page-sections/AllergiesSection";
+import { CConditionsSection } from "./form-page-sections/ChronicConditionsSection";
 
 export function FormPage() {
     return (
@@ -13,8 +14,7 @@ export function FormPage() {
             <MedicationsSection />
             <AllergiesSection />
             <h2 className="section-header">Health History</h2>
-            <ChronicConditionsSection />
-            <Immunizations />
+            <CConditionsSection />
         </>
     )
 }
