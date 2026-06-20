@@ -19,7 +19,7 @@ export function AllergiesSection() {
 
     return (
         <div className="section-wrapper">
-            <h3>Current Allergys</h3>
+            <h3>Known Allergies</h3>
 
             <GenericTable<AllergyRow>
                 rows={rows}
