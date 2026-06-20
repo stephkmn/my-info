@@ -1,5 +1,4 @@
 import { BsFillTrashFill, BsFillPencilFill } from "react-icons/bs";
-import { MedicationRow } from "../types/MedicationRow";
 import { ColumnDef } from "../types/TableConfig";
 
 interface GenericTableProps<T> {

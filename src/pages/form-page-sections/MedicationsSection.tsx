@@ -1,7 +1,7 @@
-import { GenericTable } from "../components/GenericTable";
-import { GenericEntry } from "../components/GenericEntry";
-import { ColumnDef } from "../types/TableConfig";
-import { useTableState } from "../hooks/useTableState";
+import { GenericTable } from "../../components/GenericTable";
+import { GenericEntry } from "../../components/GenericEntry";
+import { ColumnDef } from "../../types/TableConfig";
+import { useTableState } from "../../hooks/useTableState";
 
 export type MedicationRow = {
   medication: string;
