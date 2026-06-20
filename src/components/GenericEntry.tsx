@@ -44,7 +44,7 @@ export function GenericEntry<T>({
                     <div key={idx} className="input-group">
                         <label htmlFor={String(col)}>{col.label}</label>
                         <input
-                            type="text"
+                            type={col.inputType || "text"}
                             id={String(col.key)}
                             name={String(col.key)}
                             placeholder={col.placeholder || ""}
