@@ -1,10 +1,8 @@
 import { useState } from "react";
 
 import { InputField } from "../components/InputField";
-import { MedicationsTable } from "../components/MedicationsTable";
-import { TableEntry } from "../components/TableEntry";
-
-import { MedicationRow } from "../types/MedicationRow"
+import { MedicationsSection } from "../components/MedicationsSection";
+import { AllergiesSection } from "../components/AllergiesSection";
 
 export function FormPage() {
     return (
@@ -90,59 +88,14 @@ function PersonalSection() {
     )
 }
 
-function MedicationsSection() {
-    const [entryOpen, setEntryOpen] = useState(false);
-
-    const [rows, setRows] = useState([
-        { medication: "Idk", dosage: "200 mg", frequency: "2x a day", addDetails: "" }
-    ])
-
-    const [rowToEdit, setRowToEdit] = useState<number | null>(null);
-
-    function handleDeleteRow(targetIdx: number) {
-        setRows(rows.filter((_, idx) => idx !== targetIdx));
-    }
-
-    function handleEditRow(targetIdx: number) {
-        setRowToEdit(targetIdx);
-        setEntryOpen(true);
-    }
-
-    function handleAddClick() {
-        setRowToEdit(null);
-        setEntryOpen(true);
-    }
-
-    function handleSubmit(submittedRow: MedicationRow) {
-        if(rowToEdit !== null) {
-            const updatedRows = [...rows];
-            updatedRows[rowToEdit] = submittedRow;
-            setRows(updatedRows)
-        } else {
-            setRows([...rows, submittedRow]);
-        }
-        setEntryOpen(false);
-        setRowToEdit(null);
-    }
-
-    return (
-        <div className="meds-and-allergies-section">
-            <h2>Medications and Known Allergies</h2>
-            <MedicationsTable
-                rows={rows}
-                deleteRow={handleDeleteRow}
-                editRow={handleEditRow}
-            />
-            <button className="add-table-entry-btn" onClick={() => setEntryOpen(true)}>Add</button>
-            {entryOpen && <TableEntry closeEntry={() => {
-                setEntryOpen(false);
-                }}
-                onSubmit={handleSubmit}
-                initialRow={rowToEdit !== null ? rows[rowToEdit] : null}
-            />}
-        </div>
-    )
+function MedsAndAllergiesSection() {
+    <>
+        <h2>Medications and Known Allergies</h2>
+        <MedicationsSection />
+        <AllergiesSection />
+    </>
 }
+
 
 
 

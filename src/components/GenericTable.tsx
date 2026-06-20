@@ -1,34 +1,39 @@
 import { BsFillTrashFill, BsFillPencilFill } from "react-icons/bs";
-import { MedicationRow } from "../types/MedicationRow"
+import { MedicationRow } from "../types/MedicationRow";
+import { ColumnDef } from "../types/TableConfig";
 
-export function MedicationsTable({
-    rows,
-    deleteRow,
-    editRow
-}: {
-    rows: MedicationRow[];
+interface GenericTableProps<T> {
+    rows: T[];
+    columns: ColumnDef<T>[];
     deleteRow: (targetIdx: number) => void;
     editRow: (targetIdx: number) => void;
-}) {
+}
+
+export function GenericTable<T>({
+    rows,
+    columns,
+    deleteRow,
+    editRow
+}: 
+    GenericTableProps<T>
+) {
     return (
         <div className="table-wrapper">
-            <table className="medications-table">
+            <table className="generic-table">
                 <thead>
                     <tr>
-                        <th>Medication Name</th>
-                        <th>Dosage</th>
-                        <th>Frequency</th>
-                        <th>Other Details</th>
+                        {columns.map((col,idx) => (
+                            <th key={idx}>{col.label}</th>
+                        ))}
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     {rows.map((row, idx) => (
                         <tr key={idx}>
-                            <td>{row.medication}</td>
-                            <td>{row.dosage}</td>
-                            <td>{row.frequency}</td>
-                            <td>{row.addDetails}</td>
+                            {columns.map((col, colIdx) => (
+                                <td key={(colIdx)}>{String(row[col.key])}</td>
+                            ))}
                             <td className="actions">
                                 <button className="edit-btn" onClick={() => editRow(idx)}>Edit</button>
                                 <button className="del-btn" onClick={() => deleteRow(idx)}>Delete</button>
