@@ -3,7 +3,12 @@ import { GenericEntry } from "../components/GenericEntry";
 import { ColumnDef } from "../types/TableConfig";
 import { useTableState } from "../hooks/useTableState";
 
-import { MedicationRow } from "../types/MedicationRow"
+export type MedicationRow = {
+  medication: string;
+  dosage: string;
+  frequency: string;
+  addDetails: string;
+};
 
 const MEDICATIONS_COLUMNS: ColumnDef<MedicationRow>[] = [
         { key: "medication", label: "Medication", placeholder: "Medication name"},

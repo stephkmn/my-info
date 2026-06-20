@@ -3,7 +3,11 @@ import { GenericEntry } from "../components/GenericEntry";
 import { ColumnDef } from "../types/TableConfig";
 import { useTableState } from "../hooks/useTableState";
 
-import { AllergyRow } from "../types/AllergyRow"
+export type AllergyRow = {
+    allergen: string;
+    reaction: string;
+    severity: string;
+}
 
 const ALLERGIES_COLUMNS: ColumnDef<AllergyRow>[] = [
         { key: "allergen", label: "Allergen", placeholder: "e.g. Peanuts"},

@@ -12,6 +12,9 @@ export function FormPage() {
             <h2 className="section-header">Medications and Known Allergies</h2>
             <MedicationsSection />
             <AllergiesSection />
+            <h2 className="section-header">Health History</h2>
+            <ChronicConditionsSection />
+            <Immunizations />
         </>
     )
 }
