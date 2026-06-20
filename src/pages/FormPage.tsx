@@ -7,8 +7,11 @@ import { AllergiesSection } from "../components/AllergiesSection";
 export function FormPage() {
     return (
         <>
+            <h2 className="section-header">Personal Information</h2>
             <PersonalSection />
+            <h2 className="section-header">Medications and Known Allergies</h2>
             <MedicationsSection />
+            <AllergiesSection />
         </>
     )
 }
@@ -17,8 +20,7 @@ function PersonalSection() {
     const [weightUnit, setWeightUnit] = useState<"lb" | "kg">("lb");
     const [heightUnit, setHeightUnit] = useState<"in" | "cm">("in");
     return (
-        <div className="personal-section">
-            <h2 className="section-header">Personal Information</h2>
+        <div className="section-wrapper">
             <InputField
                 field="Name"
                 fieldID="name"
@@ -88,13 +90,6 @@ function PersonalSection() {
     )
 }
 
-function MedsAndAllergiesSection() {
-    <>
-        <h2>Medications and Known Allergies</h2>
-        <MedicationsSection />
-        <AllergiesSection />
-    </>
-}
 
 
 
