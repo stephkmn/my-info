@@ -1,12 +1,14 @@
-import { useState, SubmitEvent, ChangeEvent } from "react";
+import { useState, SubmitEvent, ChangeEvent, FormEvent } from "react";
 import { MedicationRow } from "../types/MedicationRow"
 
 export function TableEntry({
     closeEntry,
-    onSubmit
+    onSubmit,
+    initialRow
 } : {
     closeEntry: () => void;
     onSubmit: (r: MedicationRow) => void;
+    initialRow?: MedicationRow | null;
 })
 {
     const [formState, setFormState] = useState({

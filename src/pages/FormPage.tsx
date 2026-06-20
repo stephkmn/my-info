@@ -91,18 +91,38 @@ function PersonalSection() {
 }
 
 function MedicationsSection() {
-    const [entryOpen, setEntryOpen] = useState(false)
+    const [entryOpen, setEntryOpen] = useState(false);
 
     const [rows, setRows] = useState([
         { medication: "Idk", dosage: "200 mg", frequency: "2x a day", addDetails: "" }
     ])
 
+    const [rowToEdit, setRowToEdit] = useState<number | null>(null);
+
     function handleDeleteRow(targetIdx: number) {
         setRows(rows.filter((_, idx) => idx !== targetIdx));
     }
 
-    function handleSubmit(newRow: MedicationRow) {
-        setRows([...rows, newRow])
+    function handleEditRow(targetIdx: number) {
+        setRowToEdit(targetIdx);
+        setEntryOpen(true);
+    }
+
+    function handleAddClick() {
+        setRowToEdit(null);
+        setEntryOpen(true);
+    }
+
+    function handleSubmit(submittedRow: MedicationRow) {
+        if(rowToEdit !== null) {
+            const updatedRows = [...rows];
+            updatedRows[rowToEdit] = submittedRow;
+            setRows(updatedRows)
+        } else {
+            setRows([...rows, submittedRow]);
+        }
+        setEntryOpen(false);
+        setRowToEdit(null);
     }
 
     return (
@@ -111,12 +131,15 @@ function MedicationsSection() {
             <MedicationsTable
                 rows={rows}
                 deleteRow={handleDeleteRow}
+                editRow={handleEditRow}
             />
             <button className="add-table-entry-btn" onClick={() => setEntryOpen(true)}>Add</button>
             {entryOpen && <TableEntry closeEntry={() => {
-                setEntryOpen(false)
-            }}
-                onSubmit={handleSubmit} />}
+                setEntryOpen(false);
+                }}
+                onSubmit={handleSubmit}
+                initialRow={rowToEdit !== null ? rows[rowToEdit] : null}
+            />}
         </div>
     )
 }

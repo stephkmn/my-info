@@ -4,9 +4,11 @@ import { MedicationRow } from "../types/MedicationRow"
 export function MedicationsTable({
     rows,
     deleteRow,
+    editRow
 }: {
     rows: MedicationRow[];
     deleteRow: (targetIdx: number) => void;
+    editRow: (targetIdx: number) => void;
 }) {
     return (
         <div className="table-wrapper">
