@@ -5,6 +5,7 @@ import { MedicationsSection } from "./form-page-sections/MedicationsSection";
 import { AllergiesSection } from "./form-page-sections/AllergiesSection";
 import { CConditionsSection } from "./form-page-sections/ChronicConditionsSection";
 import { VaccinesSection } from "./form-page-sections/VaccinesSection";
+import { ContactsSection } from "./form-page-sections/ContactsSection";
 
 export function FormPage() {
     return (
@@ -17,6 +18,8 @@ export function FormPage() {
             <h2 className="section-header">Health History</h2>
             <CConditionsSection />
             <VaccinesSection />
+            <h2 className="section-header">Emergency Contacts</h2>
+            <ContactsSection />
         </>
     )
 }
