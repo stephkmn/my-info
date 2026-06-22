@@ -6,17 +6,17 @@ import { useTableState } from "../../hooks/useTableState";
 export type ContactRow = {
     name: string;
     relationship: string;
-    phone: number | null;
+    phone: string;
     email: string;
 };
 
 const CONTACT_COLUMNS: ColumnDef<ContactRow>[] = [
         { key: "name", label: "Name", placeholder: "Enter Contact Name"},
         { key: "relationship", label: "Relationship", placeholder: "e.g. Parent, Spouse"},
-        { key: "phone", label: "Phone Number", inputType: "number"},
-        { key: "email", label: "Email", inputType: "email"}
+        { key: "phone", label: "Phone Number", placeholder: "e.g. 000-000-0000"},
+        { key: "email", label: "Email", inputType: "email", placeholder: "e.g. name@gmail.com"}
     ];
-const CONTACT_EMPTY_STATE : ContactRow = {name: "", relationship: "", phone: null, email: ""}
+const CONTACT_EMPTY_STATE : ContactRow = {name: "", relationship: "", phone: "", email: ""}
 
 export function ContactsSection() {
     const { rows, entryOpen, rowToEdit,
