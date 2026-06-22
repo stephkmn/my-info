@@ -1,13 +1,12 @@
 import { useState, SubmitEvent } from "react";
 
-import { InputField } from "../components/InputField";
-
 import { PersonalSection, EMPTY_PERSONAL, PersonalInfo } from "./form-page-sections/PersonalSection";
 import { MedicationsSection, MedicationRow } from "./form-page-sections/MedicationsSection";
 import { AllergiesSection, AllergyRow } from "./form-page-sections/AllergiesSection";
 import { CConditionsSection, CConditionRow } from "./form-page-sections/ChronicConditionsSection";
 import { VaccinesSection, VaccineRow } from "./form-page-sections/VaccinesSection";
 import { EmergencyContactsSection, ContactRow } from "./form-page-sections/EmergencyContactsSection";
+import { poundsToKg, feetInchesToCm } from "../utils/unitConversionHelpers";
 
 export function FormPage() {
     const [personal, setPersonal] = useState<PersonalInfo>(EMPTY_PERSONAL)
@@ -20,18 +19,44 @@ export function FormPage() {
     function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
         e.preventDefault();
 
-        console.log({
-            personal,
+        const weightKg = 
+            personal.weight === "" 
+            ? null
+            : personal.weightUnit === "lb"
+                ? poundsToKg(Number(personal.weight))
+                : Number(personal.weight)
+
+        const heightCm = 
+            personal.heightUnit === "in"
+            ? feetInchesToCm(
+                Number(personal.heightFt || 0),
+                Number(personal.heightIn || 0)
+            )
+            : personal.heightCm === ""
+            ? null
+            : Number(personal.heightCm)
+        
+        const profileDraft = {
+            personal: {
+                name: personal.name,
+                dob: personal.dob || null,
+                addr: personal.addr || null,
+                weight_kg: weightKg,
+                height_cm: heightCm,
+                preffered_weight_unit: personal.weightUnit,
+                preferred_height_unit: personal.heightUnit
+            },
             medications,
             allergies,
             chronicConditions,
             vaccines,
             emergencyContacts
-        });
+        }
+        console.log(profileDraft);
     }
 
     return (
-        <form className="form-page">
+        <form className="form-page" onSubmit={handleSubmit}>
             <h2 className="section-header">Personal Information</h2>
             <PersonalSection personal={personal} setPersonal={setPersonal} />
 
@@ -46,7 +71,6 @@ export function FormPage() {
             <h2 className="section-header">Emergency Contacts</h2>
             <EmergencyContactsSection rows={emergencyContacts} setRows={setEmergencyContacts} />
             
-            <button type="button" onClick={() => {console.log(personal)}}>Test</button>
             <button type="submit">Submit</button>
         </form>
     )
