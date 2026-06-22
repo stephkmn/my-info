@@ -1,4 +1,4 @@
-import { useState, SubmitEvent, ChangeEvent } from "react";
+import { useState, ChangeEvent } from "react";
 import { ColumnDef } from "../types/TableConfig";
 
 interface GenericEntry<T> {
@@ -26,8 +26,7 @@ export function GenericEntry<T>({
         });
     }
 
-    const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
-        e.preventDefault();
+    const handleSubmit = () => {
         onSubmit(formState);
     };
 
@@ -39,7 +38,7 @@ export function GenericEntry<T>({
                 }
             }}>
             <button type="button" className="table-entry-close-btn" onClick={closeEntry}>X</button>
-            <form onSubmit={handleSubmit}>
+            <div>
                 {columns.map((col, idx) => (
                     <div key={idx} className="input-group">
                         <label htmlFor={String(col)}>{col.label}</label>
@@ -54,10 +53,14 @@ export function GenericEntry<T>({
                     </div>
                 ))}
 
-                <button type="submit" className="table-entry-submit-btn">
+                <button 
+                    type="submit"
+                    className="table-entry-submit-btn"
+                    onClick={handleSubmit}
+                >
                     Submit
                 </button>
-            </form>
+            </div>
         </div>
     )
 }

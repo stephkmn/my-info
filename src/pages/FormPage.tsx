@@ -31,6 +31,7 @@ export function FormPage() {
             <VaccinesSection rows={vaccines} setRows={setVaccines} />
             <h2 className="section-header">Emergency Contacts</h2>
             <EmergencyContactsSection rows={emergencyContacts} setRows={setEmergencyContacts} />
+            <button type="button" onClick={() => {console.log(medications)}}>Test</button>
             <button type="submit">Submit</button>
         </form>
     )
