@@ -9,7 +9,7 @@ import { ContactsSection } from "./form-page-sections/ContactsSection";
 
 export function FormPage() {
     return (
-        <>
+        <form className="form-page">
             <h2 className="section-header">Personal Information</h2>
             <PersonalSection />
             <h2 className="section-header">Medications and Known Allergies</h2>
@@ -20,13 +20,15 @@ export function FormPage() {
             <VaccinesSection />
             <h2 className="section-header">Emergency Contacts</h2>
             <ContactsSection />
-        </>
+            <button type="submit">Submit</button>
+        </form>
     )
 }
 
 function PersonalSection() {
     const [weightUnit, setWeightUnit] = useState<"lb" | "kg">("lb");
     const [heightUnit, setHeightUnit] = useState<"in" | "cm">("in");
+
     return (
         <div className="section-wrapper">
             <InputField
