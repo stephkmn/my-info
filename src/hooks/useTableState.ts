@@ -1,7 +1,9 @@
 import { useState } from "react";
 
-export function useTableState<T>(initialData: T[]) {
-    const [rows, setRows] = useState<T[]>(initialData);
+export function useTableState<T>(
+    rows: T[],
+    setRows: React.Dispatch<React.SetStateAction<T[]>>
+) {
     const [entryOpen, setEntryOpen] = useState(false);
     const [rowToEdit, setRowToEdit] = useState<number | null>(null);
 

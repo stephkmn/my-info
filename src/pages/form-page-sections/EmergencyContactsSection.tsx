@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 import { GenericTable } from "../../components/GenericTable";
 import { GenericEntry } from "../../components/GenericEntry";
 import { ColumnDef } from "../../types/TableConfig";
@@ -18,10 +20,15 @@ const CONTACT_COLUMNS: ColumnDef<ContactRow>[] = [
     ];
 const CONTACT_EMPTY_STATE : ContactRow = {name: "", relationship: "", phone: "", email: ""}
 
-export function ContactsSection() {
-    const { rows, entryOpen, rowToEdit,
+type EmergencyContactsSectionProp = {
+    rows: ContactRow[];
+    setRows: Dispatch<SetStateAction<ContactRow[]>>;
+}
+
+export function EmergencyContactsSection({rows, setRows}: EmergencyContactsSectionProp) {
+    const { entryOpen, rowToEdit,
             deleteRow, editRow, openAddEntry, closeEntry, submitEntry
-    } = useTableState<ContactRow>([]);
+    } = useTableState<ContactRow>(rows, setRows);
 
     return (
         <div className="section-wrapper">

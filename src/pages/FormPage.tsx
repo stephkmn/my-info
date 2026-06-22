@@ -5,21 +5,32 @@ import { MedicationsSection } from "./form-page-sections/MedicationsSection";
 import { AllergiesSection } from "./form-page-sections/AllergiesSection";
 import { CConditionsSection } from "./form-page-sections/ChronicConditionsSection";
 import { VaccinesSection } from "./form-page-sections/VaccinesSection";
-import { ContactsSection } from "./form-page-sections/ContactsSection";
+import { EmergencyContactsSection } from "./form-page-sections/EmergencyContactsSection";
+
+import { MedicationRow } from "./form-page-sections/MedicationsSection";
+import { AllergyRow } from "./form-page-sections/AllergiesSection";
+import { CConditionRow } from "./form-page-sections/ChronicConditionsSection";
+import { VaccineRow } from "./form-page-sections/VaccinesSection";
+import { ContactRow } from "./form-page-sections/EmergencyContactsSection";
 
 export function FormPage() {
+    const [medications, setMedications] = useState<MedicationRow[]>([]);
+    const [allergies, setAllergies] = useState<AllergyRow[]>([]);
+    const [chronicConditions, setChronicConditions] = useState<CConditionRow[]>([]);
+    const [vaccines, setVaccines] = useState<VaccineRow[]>([]);
+    const [emergencyContacts, setEmergencyContacts] = useState<ContactRow[]>([]);
     return (
         <form className="form-page">
             <h2 className="section-header">Personal Information</h2>
             <PersonalSection />
             <h2 className="section-header">Medications and Known Allergies</h2>
-            <MedicationsSection />
-            <AllergiesSection />
+            <MedicationsSection rows={medications} setRows={setMedications} />
+            <AllergiesSection rows={allergies} setRows={setAllergies} />
             <h2 className="section-header">Health History</h2>
-            <CConditionsSection />
-            <VaccinesSection />
+            <CConditionsSection rows={chronicConditions} setRows={setChronicConditions} />
+            <VaccinesSection rows={vaccines} setRows={setVaccines} />
             <h2 className="section-header">Emergency Contacts</h2>
-            <ContactsSection />
+            <EmergencyContactsSection rows={emergencyContacts} setRows={setEmergencyContacts} />
             <button type="submit">Submit</button>
         </form>
     )

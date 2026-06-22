@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 import { GenericTable } from "../../components/GenericTable";
 import { GenericEntry } from "../../components/GenericEntry";
 import { ColumnDef } from "../../types/TableConfig";
@@ -16,10 +18,15 @@ const VACCINES_COLUMNS: ColumnDef<VaccineRow>[] = [
     ];
 const VACCINES_EMPTY_STATE : VaccineRow = {vaccine: "", dateGiven: null, nextDose: null}
 
-export function VaccinesSection() {
-    const { rows, entryOpen, rowToEdit,
+type VaccinesSectionProps = {
+    rows: VaccineRow[];
+    setRows: Dispatch<SetStateAction<VaccineRow[]>>;
+}
+
+export function VaccinesSection({rows, setRows}: VaccinesSectionProps) {
+    const { entryOpen, rowToEdit,
             deleteRow, editRow, openAddEntry, closeEntry, submitEntry
-    } = useTableState<VaccineRow>([]);
+    } = useTableState<VaccineRow>(rows, setRows);
 
     return (
         <div className="section-wrapper">

@@ -1,7 +1,10 @@
+import { Dispatch, SetStateAction } from "react";
+
 import { GenericTable } from "../../components/GenericTable";
 import { GenericEntry } from "../../components/GenericEntry";
 import { ColumnDef } from "../../types/TableConfig";
 import { useTableState } from "../../hooks/useTableState";
+import { RxRowSpacing } from "react-icons/rx";
 
 export type AllergyRow = {
     allergen: string;
@@ -16,10 +19,15 @@ const ALLERGIES_COLUMNS: ColumnDef<AllergyRow>[] = [
     ];
 const ALLERGIES_EMPTY_STATE: AllergyRow = {allergen: "", reaction: "", severity: ""}
 
-export function AllergiesSection() {
-    const { rows, entryOpen, rowToEdit,
+type AllergiesSectionProps = {
+    rows: AllergyRow[];
+    setRows: Dispatch<SetStateAction<AllergyRow[]>>;
+};
+
+export function AllergiesSection({rows, setRows}: AllergiesSectionProps) {
+    const { entryOpen, rowToEdit,
             deleteRow, editRow, openAddEntry, closeEntry, submitEntry
-    } = useTableState<AllergyRow>([]);
+    } = useTableState<AllergyRow>(rows, setRows);
 
     return (
         <div className="section-wrapper">

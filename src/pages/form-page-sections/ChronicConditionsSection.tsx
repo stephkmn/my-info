@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 import { GenericTable } from "../../components/GenericTable";
 import { GenericEntry } from "../../components/GenericEntry";
 import { ColumnDef } from "../../types/TableConfig";
@@ -14,10 +16,15 @@ const CHRONIC_CONDITIONS_COLUMNS: ColumnDef<CConditionRow>[] = [
     ];
 const CHRONIC_CONDITIONS_EMPTY_STATE: CConditionRow = {condition: "", addDetails: ""}
 
-export function CConditionsSection() {
-    const { rows, entryOpen, rowToEdit,
+type CConditionsSectionProps = {
+    rows: CConditionRow[];
+    setRows: Dispatch<SetStateAction<CConditionRow[]>>;
+};
+
+export function CConditionsSection({rows, setRows}: CConditionsSectionProps) {
+    const { entryOpen, rowToEdit,
             deleteRow, editRow, openAddEntry, closeEntry, submitEntry
-    } = useTableState<CConditionRow>([]);
+    } = useTableState<CConditionRow>(rows, setRows);
 
     return (
         <div className="section-wrapper">
