@@ -38,7 +38,7 @@ export function VaccinesSection({rows, setRows}: VaccinesSectionProps) {
                 deleteRow={deleteRow}
                 editRow={editRow}
             />
-            <button className="add-btn" onClick={openAddEntry}>Add</button>
+            <button type="button" className="add-btn" onClick={openAddEntry}>Add</button>
 
             {entryOpen && (
                 <GenericEntry<VaccineRow>

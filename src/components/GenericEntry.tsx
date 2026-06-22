@@ -38,7 +38,7 @@ export function GenericEntry<T>({
                     closeEntry();
                 }
             }}>
-            <button className="table-entry-close-btn" onClick={closeEntry}>X</button>
+            <button type="button" className="table-entry-close-btn" onClick={closeEntry}>X</button>
             <form onSubmit={handleSubmit}>
                 {columns.map((col, idx) => (
                     <div key={idx} className="input-group">

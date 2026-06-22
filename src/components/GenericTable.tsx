@@ -34,8 +34,8 @@ export function GenericTable<T>({
                                 <td key={(colIdx)}>{String(row[col.key])}</td>
                             ))}
                             <td className="actions">
-                                <button className="edit-btn" onClick={() => editRow(idx)}>Edit</button>
-                                <button className="del-btn" onClick={() => deleteRow(idx)}>Delete</button>
+                                <button type="button" className="edit-btn" onClick={() => editRow(idx)}>Edit</button>
+                                <button type="button" className="del-btn" onClick={() => deleteRow(idx)}>Delete</button>
                             </td>
                         </tr>
                         ))}
