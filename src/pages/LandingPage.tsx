@@ -5,8 +5,8 @@ export function LandingPage() {
         <>
             <h1>Welcome to MyInfo</h1>
             <h3>All of your emergency medical information in a single QR code. </h3>
-            <Link to="/form">Generate QR Code</Link>
-            <Link to="/auth">Sign in</Link>
+            <Link to="/form">Edit My Medical Profile</Link>
+            <Link to="/qr">View My QR Code</Link>
         </>
     );
 }

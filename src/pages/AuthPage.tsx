@@ -1,6 +1,6 @@
 import { useState, SubmitEvent } from "react";
 import { supabase } from "../supabaseClient";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export function AuthPage() {
     const [mode, setMode] = useState<"signIn" | "signUp">("signIn");
@@ -10,6 +10,8 @@ export function AuthPage() {
     const [errorMessage, setErrorMessage] = useState("");
 
     const navigate = useNavigate();
+    const location = useLocation();
+    const redirectTo = (location.state as { redirectTo?: string } | null)?.redirectTo ?? "/form";
 
     async function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -27,7 +29,7 @@ export function AuthPage() {
                 return;
             }
 
-            navigate("/form", { replace: true });
+            navigate(redirectTo, { replace: true });
             return;
         }
 
@@ -42,7 +44,7 @@ export function AuthPage() {
         }
 
         if (result.data.session) {
-            navigate("/form", { replace: true });
+            navigate(redirectTo, { replace: true });
             return;
         }
 
