@@ -6,9 +6,9 @@ import { ColumnDef } from "../../types/TableConfig";
 import { useTableState } from "../../hooks/useTableState";
 
 export type VaccineRow = {
-    vaccine: string;
-    dateGiven: Date | null;
-    nextDose: Date | null;
+  vaccine: string;
+  dateGiven: string;
+  nextDose: string;
 };
 
 const VACCINES_COLUMNS: ColumnDef<VaccineRow>[] = [
@@ -16,7 +16,11 @@ const VACCINES_COLUMNS: ColumnDef<VaccineRow>[] = [
         { key: "dateGiven", label: "Date Given", inputType: "date"},
         { key: "nextDose", label: "Next Dose Date", inputType: "date"}
     ];
-const VACCINES_EMPTY_STATE : VaccineRow = {vaccine: "", dateGiven: null, nextDose: null}
+const VACCINES_EMPTY_STATE: VaccineRow = {
+  vaccine: "",
+  dateGiven: "",
+  nextDose: "",
+};
 
 type VaccinesSectionProps = {
     rows: VaccineRow[];

@@ -47,7 +47,7 @@ export function GenericEntry<T>({
                             id={String(col.key)}
                             name={String(col.key)}
                             placeholder={col.placeholder || ""}
-                            value={String(formState[col.key])}
+                            value={formState[col.key] == null ? "" : String(formState[col.key])}
                             onChange={handleChange}
                         />
                     </div>
