@@ -1,0 +1,243 @@
+:root {
+  --color-butter-yellow: #fdf6af;
+  --color-pink: #f3b6cf;
+  --color-dark-turquoise: #01a29d;
+  --color-light-turquoise: #6ec9c7;
+  --color-white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--color-butter-yellow);
+}
+
+body {
+  min-height: 100vh;
+  background: var(--color-butter-yellow);
+  color: var(--color-dark-turquoise);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+main,
+form,
+.form-page {
+  width: min(960px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 32px 0;
+}
+
+a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  margin: 8px 12px 8px 0;
+  padding: 10px 14px;
+  border: 2px solid var(--color-dark-turquoise);
+  background: var(--color-white);
+  color: var(--color-dark-turquoise);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+a:hover,
+a:focus-visible {
+  background: var(--color-light-turquoise);
+  color: var(--color-white);
+  outline: 3px solid var(--color-pink);
+  outline-offset: 2px;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0 0 16px;
+  color: var(--color-dark-turquoise);
+  line-height: 1.15;
+}
+
+h1 {
+  padding-top: 24px;
+  font-size: 2.25rem;
+}
+
+h2,
+.section-header {
+  margin-top: 32px;
+  padding-bottom: 8px;
+  border-bottom: 4px solid var(--color-pink);
+}
+
+h3 {
+  margin-top: 8px;
+}
+
+p {
+  line-height: 1.5;
+}
+
+section,
+.section-wrapper {
+  margin: 18px 0 28px;
+  padding: 20px;
+  border: 2px solid var(--color-light-turquoise);
+  background: var(--color-white);
+}
+
+label {
+  display: block;
+  margin: 12px 0 6px;
+  font-weight: 700;
+  color: var(--color-dark-turquoise);
+}
+
+input,
+select {
+  width: 100%;
+  min-height: 42px;
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border: 2px solid var(--color-light-turquoise);
+  background: var(--color-white);
+  color: var(--color-dark-turquoise);
+  font: inherit;
+}
+
+input:focus,
+select:focus {
+  border-color: var(--color-dark-turquoise);
+  outline: 3px solid var(--color-pink);
+  outline-offset: 1px;
+}
+
+button {
+  min-height: 42px;
+  margin: 8px 8px 8px 0;
+  padding: 10px 16px;
+  border: 2px solid var(--color-dark-turquoise);
+  background: var(--color-dark-turquoise);
+  color: var(--color-white);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button:hover,
+button:focus-visible {
+  background: var(--color-light-turquoise);
+  color: var(--color-white);
+  outline: 3px solid var(--color-pink);
+  outline-offset: 2px;
+}
+
+button:disabled {
+  border-color: var(--color-light-turquoise);
+  background: var(--color-light-turquoise);
+  color: var(--color-white);
+  cursor: not-allowed;
+}
+
+.add-btn,
+.table-entry-submit-btn,
+.qr-download-btn {
+  background: var(--color-pink);
+  color: var(--color-dark-turquoise);
+}
+
+.del-btn,
+.table-entry-close-btn {
+  background: var(--color-pink);
+  color: var(--color-dark-turquoise);
+}
+
+.edit-btn {
+  background: var(--color-light-turquoise);
+  color: var(--color-white);
+}
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border: 2px solid var(--color-light-turquoise);
+  background: var(--color-white);
+}
+
+.generic-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--color-white);
+}
+
+.generic-table th,
+.generic-table td {
+  padding: 12px;
+  border: 2px solid var(--color-light-turquoise);
+  text-align: left;
+  vertical-align: top;
+}
+
+.generic-table th {
+  background: var(--color-dark-turquoise);
+  color: var(--color-white);
+}
+
+.actions {
+  white-space: nowrap;
+}
+
+.table-entry-wrapper {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: var(--color-light-turquoise);
+}
+
+.table-entry-wrapper > div {
+  width: min(560px, 100%);
+  padding: 24px;
+  border: 3px solid var(--color-dark-turquoise);
+  background: var(--color-white);
+}
+
+.input-group {
+  margin-bottom: 12px;
+}
+
+canvas {
+  display: block;
+  margin: 20px 0;
+  padding: 12px;
+  border: 3px solid var(--color-dark-turquoise);
+  background: var(--color-white);
+}
+
+@media (max-width: 640px) {
+  main,
+  form,
+  .form-page {
+    width: min(100% - 20px, 960px);
+    padding: 20px 0;
+  }
+
+  section,
+  .section-wrapper {
+    padding: 14px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  a,
+  button {
+    width: 100%;
+    justify-content: center;
+  }
+}
