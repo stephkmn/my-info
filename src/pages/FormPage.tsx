@@ -1,4 +1,5 @@
 import { useEffect, useState, SubmitEvent } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { PersonalSection, EMPTY_PERSONAL, PersonalInfo } from "./form-page-sections/PersonalSection";
 import { MedicationsSection, MedicationRow } from "./form-page-sections/MedicationsSection";
@@ -20,6 +21,8 @@ export function FormPage() {
 
     const [isLoadingProfile, setIsLoadingProfile] = useState(true);
     const [loadError, setLoadError] = useState("");
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         let ignore = false;
@@ -95,7 +98,7 @@ export function FormPage() {
         }
 
         const result = await saveMedicalProfile(profileDraft);
-        console.log(result.qrId);
+        navigate(`/qr/${result.qrId}`);
     }
 
     if (isLoadingProfile) {

@@ -1,11 +1,14 @@
 import { useRef } from "react";
 import { QRCodeCanvas } from "qrcode.react";
+import { Link, useParams } from "react-router-dom";
 
 export function QRPage() {
     const qrCanvasRef = useRef<HTMLCanvasElement | null>(null);
 
-    const mockQrId = "892384303";
-    const emergencyUrl = `${window.location.origin}/${mockQrId}`;
+    const { qrId } = useParams();
+    const emergencyPath = qrId ? `/${qrId}` : "/";
+    const emergencyUrl = `${window.location.origin}${emergencyPath}`;
+    const formPage = "/form"
 
     function handleDownload() {
         const canvas = qrCanvasRef.current;
@@ -32,7 +35,7 @@ export function QRPage() {
                 size={256}
             />
 
-            <p>{emergencyUrl}</p>
+            <Link to={emergencyPath}>{emergencyUrl}</Link>
 
             <button
                 type="button"

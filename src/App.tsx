@@ -14,6 +14,7 @@ export default function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/form" element={<FormPage />} />
         <Route path="/qr" element={<QRPage />} />
+        <Route path="/qr/:qrId" element={<QRPage />} />
         <Route path="/:qrId" element={<EmergencyInfoPage />} />
         <Route path="/auth" element={<AuthPage />} />
       </Routes>
