@@ -6,10 +6,12 @@ import { LandingPage } from "./pages/LandingPage";
 import { QRPage } from "./pages/QRPage";
 import { EmergencyInfoPage } from "./pages/EmergencyInfoPage";
 import { AuthPage } from "./pages/AuthPage";
+import { NavigationDrawer } from "./components/NavigationDrawer";
 
 export default function App() {
   return (
     <BrowserRouter>
+      <NavigationDrawer />
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/form" element={<FormPage />} />
