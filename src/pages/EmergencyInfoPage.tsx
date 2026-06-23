@@ -166,9 +166,12 @@ export function EmergencyInfoPage() {
                 <p>Emergency ID: {profile.qr_id}</p>
             </header>
 
-            <p className="emergency-summary">
-                Age: {profile.age ?? "Unknown"} | Weight: {formatWeight(profile)} | Height: {formatHeight(profile)} | Last Updated: {formatDate(profile.updated_at)}
-            </p>
+            <div className="emergency-summary">
+                <p>Age: {profile.age ?? "Unknown"}</p>
+                <p>Weight: {formatWeight(profile)}</p>
+                <p>Height: {formatHeight(profile)}</p>
+                <p>Last Updated: {formatDate(profile.updated_at)}</p>
+            </div>
 
             <section>
                 <h2>Emergency Contacts</h2>
