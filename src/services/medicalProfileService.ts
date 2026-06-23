@@ -91,7 +91,91 @@ export async function saveMedicalProfile(profileDraft: ProfileDraft) {
             throw insertAllergiesError;
         }
     }
-    
+
+    // Save chronic conditions
+    const { error: deleteChronicConditionsError } = await supabase
+        .from("medical_profile_chronic_conditions")
+        .delete()
+        .eq("profile_id", profile.id);
+
+    if (deleteChronicConditionsError) {
+        throw deleteChronicConditionsError;
+    }
+
+    if (profileDraft.chronicConditions.length > 0) {
+        const { error: insertChronicConditionsError } = await supabase
+            .from("medical_profile_chronic_conditions")
+            .insert(
+                profileDraft.chronicConditions.map((row, index) => ({
+                    profile_id: profile.id,
+                    sort_order: index,
+                    condition: row.condition,
+                    add_details: row.addDetails || null,
+                }))
+            );
+
+        if (insertChronicConditionsError) {
+            throw insertChronicConditionsError;
+        }
+    }
+
+    // Save vaccines
+    const { error: deleteVaccinesError } = await supabase
+        .from("medical_profile_vaccines")
+        .delete()
+        .eq("profile_id", profile.id);
+
+    if (deleteVaccinesError) {
+        throw deleteVaccinesError;
+    }
+
+    if (profileDraft.vaccines.length > 0) {
+        const { error: insertVaccinesError } = await supabase
+            .from("medical_profile_vaccines")
+            .insert(
+                profileDraft.vaccines.map((row, index) => ({
+                    profile_id: profile.id,
+                    sort_order: index,
+                    vaccine: row.vaccine,
+                    date_given: row.dateGiven || null,
+                    next_dose: row.nextDose || null,
+                }))
+            );
+
+        if (insertVaccinesError) {
+            throw insertVaccinesError;
+        }
+    }
+
+    // Save emergency contacts
+    const { error: deleteEmergencyContactsError } = await supabase
+        .from("medical_profile_emergency_contacts")
+        .delete()
+        .eq("profile_id", profile.id);
+
+    if (deleteEmergencyContactsError) {
+        throw deleteEmergencyContactsError;
+    }
+
+    if (profileDraft.emergencyContacts.length > 0) {
+        const { error: insertEmergencyContactsError } = await supabase
+            .from("medical_profile_emergency_contacts")
+            .insert(
+                profileDraft.emergencyContacts.map((row, index) => ({
+                    profile_id: profile.id,
+                    sort_order: index,
+                    name: row.name,
+                    relationship: row.relationship || null,
+                    phone: row.phone || null,
+                    email: row.email || null,
+                }))
+            );
+
+        if (insertEmergencyContactsError) {
+            throw insertEmergencyContactsError;
+        }
+    }
+
     return {
         profileId: profile.id,
         qrId: profile.qr_id
