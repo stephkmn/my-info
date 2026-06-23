@@ -7,6 +7,8 @@ import { CConditionsSection, CConditionRow } from "./form-page-sections/ChronicC
 import { VaccinesSection, VaccineRow } from "./form-page-sections/VaccinesSection";
 import { EmergencyContactsSection, ContactRow } from "./form-page-sections/EmergencyContactsSection";
 import { poundsToKg, feetInchesToCm } from "../utils/unitConversionHelpers";
+import { saveMedicalProfile } from "../services/medicalProfileService";
+import { ProfileDraft } from "../types/ProfileDraft";
 
 export function FormPage() {
     const [personal, setPersonal] = useState<PersonalInfo>(EMPTY_PERSONAL)
@@ -16,7 +18,7 @@ export function FormPage() {
     const [vaccines, setVaccines] = useState<VaccineRow[]>([]);
     const [emergencyContacts, setEmergencyContacts] = useState<ContactRow[]>([]);
 
-    function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
+    async function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
         e.preventDefault();
 
         const weightKg = 
@@ -36,14 +38,14 @@ export function FormPage() {
             ? null
             : Number(personal.heightCm)
         
-        const profileDraft = {
+        const profileDraft : ProfileDraft = {
             personal: {
                 name: personal.name,
                 dob: personal.dob || null,
                 addr: personal.addr || null,
                 weight_kg: weightKg,
                 height_cm: heightCm,
-                preffered_weight_unit: personal.weightUnit,
+                preferred_weight_unit: personal.weightUnit,
                 preferred_height_unit: personal.heightUnit
             },
             medications,
@@ -52,7 +54,9 @@ export function FormPage() {
             vaccines,
             emergencyContacts
         }
-        console.log(profileDraft);
+        
+        const result = await saveMedicalProfile(profileDraft);
+        console.log(result.qrId);
     }
 
     return (

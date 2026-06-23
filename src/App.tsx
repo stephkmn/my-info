@@ -5,6 +5,7 @@ import { FormPage } from "./pages/FormPage";
 import { LandingPage } from "./pages/LandingPage";
 import { QRPage } from "./pages/QRPage";
 import { EmergencyInfoPage } from "./pages/EmergencyInfoPage";
+import { AuthPage } from "./pages/AuthPage";
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
         <Route path="/form" element={<FormPage />} />
         <Route path="/qr" element={<QRPage />} />
         <Route path="/:qrId" element={<EmergencyInfoPage />} />
+        <Route path="/auth" element={<AuthPage />} />
       </Routes>
     </BrowserRouter>
   );
