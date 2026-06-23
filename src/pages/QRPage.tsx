@@ -2,45 +2,45 @@ import { useRef } from "react";
 import { QRCodeCanvas } from "qrcode.react";
 
 export function QRPage() {
-  const qrCanvasRef = useRef<HTMLCanvasElement | null>(null);
+    const qrCanvasRef = useRef<HTMLCanvasElement | null>(null);
 
-  const mockQrId = "892384303";
-  const emergencyUrl = `${window.location.origin}/${mockQrId}`;
+    const mockQrId = "892384303";
+    const emergencyUrl = `${window.location.origin}/${mockQrId}`;
 
-  function handleDownload() {
-    const canvas = qrCanvasRef.current;
+    function handleDownload() {
+        const canvas = qrCanvasRef.current;
 
-    if (!canvas) {
-      return;
+        if (!canvas) {
+            return;
+        }
+
+        const pngUrl = canvas.toDataURL("image/png");
+
+        const downloadLink = document.createElement("a");
+        downloadLink.href = pngUrl;
+        downloadLink.download = "my-info-emergency-qr.png";
+        downloadLink.click();
     }
 
-    const pngUrl = canvas.toDataURL("image/png");
+    return (
+        <>
+            <h1>Your Emergency QR Code</h1>
 
-    const downloadLink = document.createElement("a");
-    downloadLink.href = pngUrl;
-    downloadLink.download = "my-info-emergency-qr.png";
-    downloadLink.click();
-  }
+            <QRCodeCanvas
+                ref={qrCanvasRef}
+                value={emergencyUrl}
+                size={256}
+            />
 
-  return (
-    <>
-      <h1>Your Emergency QR Code</h1>
+            <p>{emergencyUrl}</p>
 
-      <QRCodeCanvas
-        ref={qrCanvasRef}
-        value={emergencyUrl}
-        size={256}
-      />
-
-      <p>{emergencyUrl}</p>
-
-      <button
-        type="button"
-        className="qr-download-btn"
-        onClick={handleDownload}
-      >
-        Download QR
-      </button>
-    </>
-  );
+            <button
+                type="button"
+                className="qr-download-btn"
+                onClick={handleDownload}
+            >
+                Download QR
+            </button>
+        </>
+    );
 }
