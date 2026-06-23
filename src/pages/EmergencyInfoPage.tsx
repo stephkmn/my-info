@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { supabase } from "../supabaseClient";
 
+import { EmergencyInfoSection } from "../components/EmergencyInfoSection";
+
 type EmergencyProfile = {
     qr_id: string;
     full_name: string;
@@ -71,85 +73,66 @@ export function EmergencyInfoPage() {
             <p>Age: {profile.age ?? "Unknown"}</p>
             <p>QR ID: {profile.qr_id}</p>
 
-            <section>
-                <h2>Emergency Contacts</h2>
-
-                {profile.emergency_contacts.length === 0 ? (
-                    <p>None</p>
-                ) : (
-                    profile.emergency_contacts.map((contact) => (
-                        <div key={`${contact.name}-${contact.phone}`}>
-                            <strong>{contact.name}</strong>
-                            <p>{contact.relationship}</p>
-                            <p>{contact.phone}</p>
-                            <p>{contact.email}</p>
-                        </div>
-                    ))
+            <EmergencyInfoSection
+                title="Emergency Contacts"
+                items={profile.emergency_contacts}
+                renderItem={(contact) => (
+                    <div key={`${contact.name}-${contact.phone}`}>
+                        <strong>{contact.name}</strong>
+                        <p>{contact.relationship}</p>
+                        <p>{contact.phone}</p>
+                        <p>{contact.email}</p>
+                    </div>
                 )}
-            </section>
+            />
 
-            <section>
-                <h2>Allergies</h2>
-
-                {profile.allergies.length === 0 ? (
-                    <p>None</p>
-                ) : (
-                    profile.allergies.map((allergy) => (
-                        <div key={allergy.allergen}>
-                            <strong>{allergy.allergen}</strong>
-                            <p>{allergy.reaction}</p>
-                            <p>{allergy.severity}</p>
-                        </div>
-                    ))
+            <EmergencyInfoSection
+                title="Allergies"
+                items={profile.allergies}
+                renderItem={(allergy) => (
+                    <div key={allergy.allergen}>
+                        <strong>{allergy.allergen}</strong>
+                        <p>{allergy.reaction}</p>
+                        <p>{allergy.severity}</p>
+                    </div>
                 )}
-            </section>
+            />
 
-            <section>
-                <h2>Medications</h2>
-
-                {profile.medications.length === 0 ? (
-                    <p>None</p>
-                ) : (
-                    profile.medications.map((medication) => (
-                        <div key={medication.medication}>
-                            <strong>{medication.medication}</strong>
-                            <p>Dosage: {medication.dosage}</p>
-                            <p>Frequency: {medication.frequency}</p>
-                            <p>Other details: {medication.addDetails}</p>
-                        </div>
-                    ))
+            <EmergencyInfoSection
+                title="Medications"
+                items={profile.medications}
+                renderItem={(medication) => (
+                    <div key={medication.medication}>
+                        <strong>{medication.medication}</strong>
+                        <p>Dosage: {medication.dosage}</p>
+                        <p>Frequency: {medication.frequency}</p>
+                        <p>Other details: {medication.addDetails}</p>
+                    </div>
                 )}
-            </section>
+            />
 
-            <section>
-                <h2>Vaccines</h2>
-
-                {profile.vaccines.length === 0 ? (
-                    <p>None</p>
-                ) : (
-                    profile.vaccines.map((vaccine) => (
-                        <div key={vaccine.vaccine}>
-                            <strong>{vaccine.vaccine}</strong>
-                            <p>Date Given: {vaccine.dateGiven}</p>
-                            <p>Next Dose Date: {vaccine.nextDose}</p>
-                        </div>
-                    ))
+            <EmergencyInfoSection
+                title="Vaccines"
+                items={profile.vaccines}
+                renderItem={(vaccine) => (
+                    <div key={vaccine.vaccine}>
+                        <strong>{vaccine.vaccine}</strong>
+                        <p>Date Given: {vaccine.dateGiven}</p>
+                        <p>Next Dose Date: {vaccine.nextDose || "None"}</p>
+                    </div>
                 )}
-            </section>
+            />
 
-            <section>
-                <h2>Chronic Conditions</h2>
-                {profile.chronic_conditions.length === 0 ? (
-                    <p>None</p>
-                ) : (
-                    profile.chronic_conditions.map((chronic_conditions) => (
-                        <div key={chronic_conditions.condition}>
-                            <strong>{chronic_conditions.condition}</strong>
-                            <p>Details: {chronic_conditions.addDetails}</p>
-                        </div>
-                    ))
+            <EmergencyInfoSection
+                title="Chronic Conditions"
+                items={profile.chronic_conditions}
+                renderItem={(condition) => (
+                    <div key={condition.condition}>
+                        <strong>{condition.condition}</strong>
+                        <p>Details: {condition.addDetails || "None"}</p>
+                    </div>
                 )}
-            </section>
+            />
         </main>
     );
 }
