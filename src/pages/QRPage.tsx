@@ -95,7 +95,7 @@ export function QRPage() {
     }
 
     return (
-        <>
+        <main className="qr-page">
             <h1>Your Emergency QR Code</h1>
 
             <QRCodeCanvas
@@ -113,6 +113,6 @@ export function QRPage() {
             >
                 Download QR
             </button>
-        </>
+        </main>
     );
 }
