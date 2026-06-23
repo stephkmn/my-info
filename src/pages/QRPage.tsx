@@ -4,11 +4,15 @@ import { Link, useParams } from "react-router-dom";
 
 export function QRPage() {
     const qrCanvasRef = useRef<HTMLCanvasElement | null>(null);
-
+    
     const { qrId } = useParams();
-    const emergencyPath = qrId ? `/${qrId}` : "/";
+
+    if (!qrId) {
+        return <main>No QR code available yet. Submit your profile first.</main>;
+    }
+
+    const emergencyPath = `/${qrId}`;
     const emergencyUrl = `${window.location.origin}${emergencyPath}`;
-    const formPage = "/form"
 
     function handleDownload() {
         const canvas = qrCanvasRef.current;

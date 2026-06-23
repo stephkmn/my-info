@@ -1,55 +1,89 @@
 import { useState, SubmitEvent } from "react";
 import { supabase } from "../supabaseClient";
+import { useNavigate } from "react-router-dom";
 
 export function AuthPage() {
-  const [mode, setMode] = useState<"signIn" | "signUp">("signIn");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+    const [mode, setMode] = useState<"signIn" | "signUp">("signIn");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [message, setMessage] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
-  async function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
-    e.preventDefault();
+    const navigate = useNavigate();
 
-    const result =
-      mode === "signIn"
-        ? await supabase.auth.signInWithPassword({ email, password })
-        : await supabase.auth.signUp({ email, password });
+    async function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
+        e.preventDefault();
+        setMessage("");
+        setErrorMessage("");
 
-    if (result.error) {
-      console.error(result.error.message);
-      return;
+        if (mode === "signIn") {
+            const result = await supabase.auth.signInWithPassword({
+                email,
+                password,
+            });
+
+            if (result.error) {
+                setErrorMessage(result.error.message);
+                return;
+            }
+
+            navigate("/form", { replace: true });
+            return;
+        }
+
+        const result = await supabase.auth.signUp({
+            email,
+            password,
+        });
+
+        if (result.error) {
+            setErrorMessage(result.error.message);
+            return;
+        }
+
+        if (result.data.session) {
+            navigate("/form", { replace: true });
+            return;
+        }
+
+        setMessage("Check your email to confirm your account. After confirming, come back here and sign in.");
     }
 
-    console.log("Auth success", result.data);
-  }
+    return (
+        <form onSubmit={handleSubmit}>
+            <h1>{mode === "signIn" ? "Sign In" : "Create Account"}</h1>
+            <p>{mode === "signIn"
+                ? "Sign in to edit your medical profile."
+                : "Create an account to create your medical profile."
+            }</p>
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <h1>{mode === "signIn" ? "Sign In" : "Create Account"}</h1>
+            {errorMessage && <p>{errorMessage}</p>}
+            {message && <p>{message}</p>}
+            
+            <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email"
+            />
 
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
-      />
+            <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Password"
+            />
 
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-      />
+            <button type="submit">
+                {mode === "signIn" ? "Sign In" : "Create Account"}
+            </button>
 
-      <button type="submit">
-        {mode === "signIn" ? "Sign In" : "Create Account"}
-      </button>
-
-      <button
-        type="button"
-        onClick={() => setMode(mode === "signIn" ? "signUp" : "signIn")}
-      >
-        Switch to {mode === "signIn" ? "Create Account" : "Sign In"}
-      </button>
-    </form>
-  );
+            <button
+                type="button"
+                onClick={() => setMode(mode === "signIn" ? "signUp" : "signIn")}
+            >
+                Switch to {mode === "signIn" ? "Create Account" : "Sign In"}
+            </button>
+        </form>
+    );
 }

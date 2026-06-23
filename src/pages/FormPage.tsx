@@ -1,5 +1,6 @@
 import { useEffect, useState, SubmitEvent } from "react";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "../supabaseClient";
 
 import { PersonalSection, EMPTY_PERSONAL, PersonalInfo } from "./form-page-sections/PersonalSection";
 import { MedicationsSection, MedicationRow } from "./form-page-sections/MedicationsSection";
@@ -28,6 +29,23 @@ export function FormPage() {
         let ignore = false;
 
         async function loadProfile() {
+            const {
+                data: { user },
+                error: userError,
+            } = await supabase.auth.getUser();
+
+            if (ignore) {
+                return;
+            }
+
+            if (userError || !user) {
+                navigate("/auth", {
+                    replace: true,
+                    state: { redirectTo: "/form" },
+                });
+                return;
+            }
+
             try {
                 const savedProfile = await loadCurrentUserMedicalProfile();
 
@@ -58,7 +76,7 @@ export function FormPage() {
         return () => {
             ignore = true;
         };
-    }, []);
+    }, [navigate]);
 
     async function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
         e.preventDefault();
