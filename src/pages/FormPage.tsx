@@ -138,19 +138,19 @@ export function FormPage() {
         }
 
         if (!isPositiveNumber(personal.weight)) {
-            return "Weight is required.";
+            return "Weight is invalid.";
         }
 
         if (personal.heightUnit === "cm") {
             if (!isPositiveNumber(personal.heightCm)) {
-                return "Height is required.";
+                return "Height is invalid.";
             }
         } else {
             const feet = Number(personal.heightFt || 0);
             const inches = Number(personal.heightIn || 0);
 
             if (!Number.isFinite(feet) || !Number.isFinite(inches) || feet * 12 + inches <= 0) {
-                return "Height is required.";
+                return "Height is invalid.";
             }
         }
 
