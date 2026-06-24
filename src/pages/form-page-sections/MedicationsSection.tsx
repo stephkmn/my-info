@@ -13,8 +13,8 @@ export type MedicationRow = {
 };
 
 const MEDICATIONS_COLUMNS: ColumnDef<MedicationRow>[] = [
-        { key: "medication", label: "Medication", placeholder: "Medication name"},
-        { key: "dosage", label: "Dosage", placeholder: "e.g. 200 mg"},
+        { key: "medication", label: "Medication", placeholder: "Medication name", required: true},
+        { key: "dosage", label: "Dosage", placeholder: "e.g. 200 mg", required: true},
         { key: "frequency", label: "Frequency", placeholder: "e.g. 2x a day"},
         { key: "addDetails", label: "Additional Details", placeholder: ""},
     ];

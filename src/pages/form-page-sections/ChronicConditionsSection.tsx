@@ -11,7 +11,7 @@ export type CConditionRow = {
 };
 
 const CHRONIC_CONDITIONS_COLUMNS: ColumnDef<CConditionRow>[] = [
-        { key: "condition", label: "Condition", placeholder: "e.g. Heart Disease, Diabetes"},
+        { key: "condition", label: "Condition", placeholder: "e.g. Heart Disease, Diabetes", required: true},
         { key: "addDetails", label: "Additional Details", placeholder: ""}
     ];
 const CHRONIC_CONDITIONS_EMPTY_STATE: CConditionRow = {condition: "", addDetails: ""}

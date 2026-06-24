@@ -3,4 +3,5 @@ export type ColumnDef<T> = {
     label: string;
     placeholder?: string;
     inputType?: "text" | "date" | "number" | "email";
+    required?: boolean;
 }

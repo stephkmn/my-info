@@ -13,9 +13,9 @@ export type ContactRow = {
 };
 
 const CONTACT_COLUMNS: ColumnDef<ContactRow>[] = [
-        { key: "name", label: "Name", placeholder: "Enter Contact Name"},
+        { key: "name", label: "Name", placeholder: "Enter Contact Name", required: true},
         { key: "relationship", label: "Relationship", placeholder: "e.g. Parent, Spouse"},
-        { key: "phone", label: "Phone Number", placeholder: "e.g. 000-000-0000"},
+        { key: "phone", label: "Phone Number", placeholder: "e.g. 000-000-0000", required: true},
         { key: "email", label: "Email", inputType: "email", placeholder: "e.g. name@gmail.com"}
     ];
 const CONTACT_EMPTY_STATE : ContactRow = {name: "", relationship: "", phone: "", email: ""}

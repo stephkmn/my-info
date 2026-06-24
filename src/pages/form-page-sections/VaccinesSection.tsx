@@ -12,8 +12,8 @@ export type VaccineRow = {
 };
 
 const VACCINES_COLUMNS: ColumnDef<VaccineRow>[] = [
-        { key: "vaccine", label: "Vaccine", placeholder: "e.g. HepB, TIV"},
-        { key: "dateGiven", label: "Date Given", inputType: "date"},
+        { key: "vaccine", label: "Vaccine", placeholder: "e.g. HepB, TIV", required: true},
+        { key: "dateGiven", label: "Date Given", inputType: "date", required: true},
         { key: "nextDose", label: "Next Dose Date", inputType: "date"}
     ];
 const VACCINES_EMPTY_STATE: VaccineRow = {

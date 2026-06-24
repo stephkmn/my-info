@@ -4,7 +4,6 @@ import { GenericTable } from "../../components/GenericTable";
 import { GenericEntry } from "../../components/GenericEntry";
 import { ColumnDef } from "../../types/TableConfig";
 import { useTableState } from "../../hooks/useTableState";
-import { RxRowSpacing } from "react-icons/rx";
 
 export type AllergyRow = {
     allergen: string;
@@ -13,9 +12,9 @@ export type AllergyRow = {
 }
 
 const ALLERGIES_COLUMNS: ColumnDef<AllergyRow>[] = [
-        { key: "allergen", label: "Allergen", placeholder: "e.g. Peanuts"},
-        { key: "reaction", label: "Reaction", placeholder: "e.g. Hives, Swelling"},
-        { key: "severity", label: "Severity", placeholder: "e.g. Mild, Severe"}
+        { key: "allergen", label: "Allergen", placeholder: "e.g. Peanuts", required: true},
+        { key: "reaction", label: "Reaction", placeholder: "e.g. Hives, Swelling", required: true},
+        { key: "severity", label: "Severity", placeholder: "e.g. Mild, Severe", required: true}
     ];
 const ALLERGIES_EMPTY_STATE: AllergyRow = {allergen: "", reaction: "", severity: ""}
 

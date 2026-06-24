@@ -18,8 +18,10 @@ export function GenericEntry<T>({
 } : GenericEntry<T> )
 {
     const [formState, setFormState] = useState<T>(initialRow || emptyState)
+    const [errorMessage, setErrorMessage] = useState("");
 
     const handleChange = (e:ChangeEvent<HTMLInputElement>) => {
+        setErrorMessage("");
         setFormState({
             ...formState,
             [e.target.name]: e.target.value
@@ -27,6 +29,20 @@ export function GenericEntry<T>({
     }
 
     const handleSubmit = () => {
+        const missingColumn = columns.find((col) => {
+            if (!col.required) {
+                return false;
+            }
+
+            const value = formState[col.key];
+            return value === null || value === undefined || String(value).trim() === "";
+        });
+
+        if (missingColumn) {
+            setErrorMessage(`${missingColumn.label} is required.`);
+            return;
+        }
+
         onSubmit(formState);
     };
 
@@ -39,14 +55,16 @@ export function GenericEntry<T>({
             }}>
             <div>
                 <button type="button" className="table-entry-close-btn" onClick={closeEntry}>X</button>
+                {errorMessage && <p className="validation-error">{errorMessage}</p>}
                 {columns.map((col, idx) => (
                     <div key={idx} className="input-group">
-                        <label htmlFor={String(col)}>{col.label}</label>
+                        <label htmlFor={String(col.key)}>{col.label}</label>
                         <input
                             type={col.inputType || "text"}
                             id={String(col.key)}
                             name={String(col.key)}
                             placeholder={col.placeholder || ""}
+                            required={col.required}
                             value={formState[col.key] == null ? "" : String(formState[col.key])}
                             onChange={handleChange}
                         />
@@ -54,7 +72,7 @@ export function GenericEntry<T>({
                 ))}
 
                 <button 
-                    type="submit"
+                    type="button"
                     className="table-entry-submit-btn"
                     onClick={handleSubmit}
                 >
