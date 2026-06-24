@@ -1,8 +1,8 @@
-# My Info
+# 🦋 MyInfo
 
-My Info is a web application that allows users to securely store medical information and generate a QR code for emergency situations. Scanning the QR code opens a public emergency page with critical medical details, helping first responders quickly access the information they may need.
+MyInfo is a web application that allows users to securely store medical information and generate a QR code for emergency situations. Scanning the QR code opens a public emergency page with critical medical details, helping first responders quickly access the information they may need.
 
-## Features
+## 💛 Features
 
 - **Secure user authentication**
 - **Private medical profile storage**
@@ -18,14 +18,14 @@ My Info is a web application that allows users to securely store medical informa
 - **Responsive mobile-friendly design**
 - **Authentication-aware navigation**
 
-## Technologies
+## 🩷 Technologies
 - `React`
 - `TypeScript`
 - `Supabase`
 - `HTML/CSS`
 - `JavaScript`
 
-## Running the project
+## 🐴 Running the project
 
 1. Clone the repo
 
@@ -58,3 +58,27 @@ npm start
 ```bash
 npm run build
 ```
+## 🪽 Screenshots 
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img width="500" alt="image" src="https://github.com/user-attachments/assets/b350e6e2-6586-445b-878c-992da5af7eb6" />
+    </td>
+    <td align="center" width="50%">
+      <img width="500" alt="image" src="https://github.com/user-attachments/assets/b6eb31ba-c4b5-406b-812c-84d88551bc95" />
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img width="500" alt="image" src="https://github.com/user-attachments/assets/c449e563-54ff-4ba9-8eaf-14906f7e7c25" />
+    </td>
+    <td align="center" width="50%">
+      <img width="500" alt="image" src="https://github.com/user-attachments/assets/49fdeccb-9f97-4503-a70c-6ee1532f9edb" />
+    </td>
+  </tr>
+</table>
+
+
+
+
+
